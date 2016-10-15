@@ -1,0 +1,278 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/show_create_customer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/person_icon" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_customer_name"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/email_icon" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_customer_email"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/image_icon" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_image_path"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:textIsSelectable="true"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_image_path"
+                        android:inputType="text"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/phone_icon" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_phone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_customer_phone"
+                        android:numeric="decimal"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/ic_action_home" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_street_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:hint="@string/hint_customer_street_address"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/ic_action_home" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_street_address_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:hint="@string/hint_customer_street_address_2"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/ic_action_map" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/imgTopic"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:ems="10"
+                        android:hint="@string/hint_customer_city"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/location_icon" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/imgTopic"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:hint="@string/state"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_tiny" >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_xsmall"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/barcode_icon" />
+
+                    <EditText
+                        android:id="@+id/edit_text_customer_zip_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_xnormal"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_zip_code"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_padding_xtiny" >
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="@dimen/icon_width_height"
+                        android:layout_height="@dimen/icon_width_height"
+                        android:layout_marginLeft="@dimen/margin_padding_small"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/content_icon" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_padding_large"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:layout_toRightOf="@+id/imageView1"
+                        android:text="@string/hint_customer_note"
+                        android:textSize="@dimen/text_size_xxnormal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_note_order"
+                        android:layout_alignLeft="@+id/textView1"
+                        android:layout_below="@+id/textView1"
+                        android:layout_marginTop="@dimen/margin_padding_tiny"
+                        android:background="@drawable/background_content"
+                        android:padding="@dimen/margin_padding_tiny" >
+
+                        <EditText
+                            android:id="@+id/edit_text_customer_note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:ems="10"
+                            android:paddingRight="@dimen/margin_padding_tiny"
+                            android:singleLine="false" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+</LinearLayout>
