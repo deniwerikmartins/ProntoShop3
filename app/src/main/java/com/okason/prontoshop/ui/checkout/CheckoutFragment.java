@@ -25,7 +25,7 @@ import com.squareup.otto.Bus;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
@@ -43,15 +43,15 @@ public class CheckoutFragment extends Fragment implements
 
 
 
-    @Bind(R.id.cart_list_recyclerview) RecyclerView mRecyclerView;
-    @Bind(R.id.empty_text) TextView mEmptyTextView;
-    @Bind(R.id.clear_cart_button) Button mClearButton;
-    @Bind(R.id.check_out_button) Button mCheckoutButton;
-    @Bind(R.id.text_view_sub_total) TextView mSubTotalTextView;
-    @Bind(R.id.text_view_total_amount) TextView mTotalTextView;
-    @Bind(R.id.text_view_tax_rate) TextView mTotalTaxRate;
-    @Bind(R.id.text_view_tax_value) TextView mTotalTaxValue;
-    @Bind(R.id.radio_group_payment_type)     RadioGroup mRadioGroup;
+    @BindView(R.id.cart_list_recyclerview) RecyclerView mRecyclerView;
+    @BindView(R.id.empty_text) TextView mEmptyTextView;
+    @BindView(R.id.clear_cart_button) Button mClearButton;
+    @BindView(R.id.check_out_button) Button mCheckoutButton;
+    @BindView(R.id.text_view_sub_total) TextView mSubTotalTextView;
+    @BindView(R.id.text_view_total_amount) TextView mTotalTextView;
+    @BindView(R.id.text_view_tax_rate) TextView mTotalTaxRate;
+    @BindView(R.id.text_view_tax_value) TextView mTotalTaxValue;
+    @BindView(R.id.radio_group_payment_type)     RadioGroup mRadioGroup;
 
     private Bus mBus;
 

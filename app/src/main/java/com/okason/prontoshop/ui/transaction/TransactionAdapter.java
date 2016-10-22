@@ -14,7 +14,7 @@ import com.okason.prontoshop.util.Formatter;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -81,11 +81,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
 
-        @Bind(R.id.checkout_paid_status)  CheckBox paidCheckbox;
-        @Bind(R.id.text_view_customers_name) TextView customerName;
-        @Bind(R.id.text_view_payment_method) TextView paymentMethod;
-        @Bind(R.id.text_view_total_amount) TextView totalAmount;
-        @Bind(R.id.text_view_date_of_transaction) TextView dateOfTransaction;
+        @BindView(R.id.checkout_paid_status)  CheckBox paidCheckbox;
+        @BindView(R.id.text_view_customers_name) TextView customerName;
+        @BindView(R.id.text_view_payment_method) TextView paymentMethod;
+        @BindView(R.id.text_view_total_amount) TextView totalAmount;
+        @BindView(R.id.text_view_date_of_transaction) TextView dateOfTransaction;
 
         public ViewHolder(View itemView) {
             super(itemView);

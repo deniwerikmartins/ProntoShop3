@@ -18,7 +18,7 @@ import com.okason.prontoshop.R;
 import com.okason.prontoshop.models.Customer;
 import com.okason.prontoshop.util.Constants;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -29,16 +29,16 @@ public class AddCustomerDialogFragment extends DialogFragment implements AddCust
     private AddCustomerContract.Action mPresenter;
     private boolean mInEditMode = false;
 
-    @Bind(R.id.edit_text_customer_name)  EditText mNameEditText;
-    @Bind(R.id.edit_text_customer_email) EditText mEmailEditText;
-    @Bind(R.id.edit_text_customer_image_path) EditText mImagePathEditText;
-    @Bind(R.id.edit_text_customer_phone) EditText mPhoneEditText;
-    @Bind(R.id.edit_text_customer_street_address) EditText mStreet1EditText;
-    @Bind(R.id.edit_text_customer_street_address_2) EditText mStreet2EditText;
-    @Bind(R.id.edit_text_customer_city) EditText mCityEditText;
-    @Bind(R.id.edit_text_customer_state) EditText mStateEditText;
-    @Bind(R.id.edit_text_customer_zip_code) EditText mZipEditText;
-    @Bind(R.id.edit_text_customer_note) EditText mCustomerNote;
+    @BindView(R.id.edit_text_customer_name)  EditText mNameEditText;
+    @BindView(R.id.edit_text_customer_email) EditText mEmailEditText;
+    @BindView(R.id.edit_text_customer_image_path) EditText mImagePathEditText;
+    @BindView(R.id.edit_text_customer_phone) EditText mPhoneEditText;
+    @BindView(R.id.edit_text_customer_street_address) EditText mStreet1EditText;
+    @BindView(R.id.edit_text_customer_street_address_2) EditText mStreet2EditText;
+    @BindView(R.id.edit_text_customer_city) EditText mCityEditText;
+    @BindView(R.id.edit_text_customer_state) EditText mStateEditText;
+    @BindView(R.id.edit_text_customer_zip_code) EditText mZipEditText;
+    @BindView(R.id.edit_text_customer_note) EditText mCustomerNote;
 
 
     public static AddCustomerDialogFragment newInstance(long id){

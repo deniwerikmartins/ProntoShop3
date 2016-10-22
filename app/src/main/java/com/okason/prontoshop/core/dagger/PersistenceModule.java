@@ -2,12 +2,12 @@ package com.okason.prontoshop.core.dagger;
 
 import android.content.Context;
 
+import com.okason.prontoshop.data.CustomerInMemoryRepository;
+import com.okason.prontoshop.data.ProductInMemoryRepository;
+import com.okason.prontoshop.data.TransactionInMemoryRepository;
 import com.okason.prontoshop.ui.customers.CustomerListContract;
-import com.okason.prontoshop.ui.customers.CustomerSQLiteManager;
 import com.okason.prontoshop.ui.products.ProductListContract;
-import com.okason.prontoshop.ui.products.ProductSQLiteManager;
 import com.okason.prontoshop.ui.transaction.TransactionContract;
-import com.okason.prontoshop.ui.transaction.TransactionSQLiteManager;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,17 +20,17 @@ public class PersistenceModule {
 
     @Provides
     public ProductListContract.Repository providesProductRepository(Context context){
-        return new ProductSQLiteManager(context);
+        return new ProductInMemoryRepository();
     }
 
     @Provides
     public CustomerListContract.Repository providesCustomerRepository(Context context){
-        return new CustomerSQLiteManager(context);
+        return new CustomerInMemoryRepository();
     }
 
 
     @Provides
     public TransactionContract.Repository providesTransactionRepository(Context context){
-        return new TransactionSQLiteManager(context);
+        return new TransactionInMemoryRepository();
     }
 }

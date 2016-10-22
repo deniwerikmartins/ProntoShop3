@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -35,8 +35,8 @@ public class TransactionListFragment extends Fragment
     private TransactionAdapter mAdapter;
     private TransactionContract.Actions mPresenter;
 
-    @Bind(R.id.transaction_recycler_view) RecyclerView mRecyclerView;
-    @Bind(R.id.empty_text) TextView mEmptyTextView;
+    @BindView(R.id.transaction_recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.empty_text) TextView mEmptyTextView;
 
     @Inject Bus mBus;
 

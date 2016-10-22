@@ -22,11 +22,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".common.AddInitialDataService"
-            android:exported="false">
-        </service>
-
         <activity
             android:name=".ui.transaction.TransactionActivity"
             android:label="@string/title_activity_transaction"

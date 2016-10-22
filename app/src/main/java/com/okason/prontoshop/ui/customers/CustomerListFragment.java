@@ -26,7 +26,7 @@ import com.okason.prontoshop.ui.addCustomer.AddCustomerDialogFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -40,9 +40,9 @@ public class CustomerListFragment extends Fragment implements
     private CustomerListContract.Actions mCustomerPresenter;
 
 
-    @Bind(R.id.customer_recycler_view) RecyclerView mRecyclerView;
-    @Bind(R.id.empty_text) TextView mEmptyTextView;
-    @Bind(R.id.fab ) FloatingActionButton mFab;
+    @BindView(R.id.customer_recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.empty_text) TextView mEmptyTextView;
+    @BindView(R.id.fab ) FloatingActionButton mFab;
 
 
     public CustomerListFragment() {

@@ -8,7 +8,6 @@ import com.okason.prontoshop.ui.customers.CustomerListPresenter;
 import com.okason.prontoshop.ui.products.ProductListPresenter;
 import com.okason.prontoshop.ui.transaction.TransactionListFragment;
 import com.okason.prontoshop.ui.transaction.TransactionPresenter;
-import com.okason.prontoshop.ui.transaction.TransactionSQLiteManager;
 
 import javax.inject.Singleton;
 
@@ -36,6 +35,6 @@ public interface AppComponent {
         void inject(TransactionPresenter presenter);
         void inject(TransactionListFragment fragment);
         void inject(MainActivity activity);
-        void inject(TransactionSQLiteManager manager);
+
 
 }

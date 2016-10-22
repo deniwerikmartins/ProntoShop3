@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
@@ -90,9 +90,9 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
-        @Bind(R.id.image_view_customer_head_shot)ImageView customerHeadShot;
-        @Bind(R.id.text_view_customers_name) TextView customerName;
-        @Bind(R.id.text_view_customers_email) TextView customerEmail;
+        @BindView(R.id.image_view_customer_head_shot)ImageView customerHeadShot;
+        @BindView(R.id.text_view_customers_name) TextView customerName;
+        @BindView(R.id.text_view_customers_email) TextView customerEmail;
 
 
         public ViewHolder(View itemView) {

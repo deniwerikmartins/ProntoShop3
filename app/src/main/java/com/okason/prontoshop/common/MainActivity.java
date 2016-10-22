@@ -34,20 +34,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
 
 
-    @Bind(R.id.text_view_number_of_items) TextView mQtyTextView;
-    @Bind(R.id.text_view_total_amount) TextView mTotalTextView;
-    @Bind(R.id.text_view_customers_name) TextView mNameTextView;
+    @BindView(R.id.text_view_number_of_items) TextView mQtyTextView;
+    @BindView(R.id.text_view_total_amount) TextView mTotalTextView;
+    @BindView(R.id.text_view_customers_name) TextView mNameTextView;
 
-    @Bind(R.id.toolbar)Toolbar mToolbar;
-    @Bind(R.id.tabs) TabLayout tabLayout;
-    @Bind(R.id.viewpager) ViewPager viewPager;
+    @BindView(R.id.toolbar)Toolbar mToolbar;
+    @BindView(R.id.tabs) TabLayout tabLayout;
+    @BindView(R.id.viewpager) ViewPager viewPager;
     private Bus mBus;
     @Inject ShoppingCart mCart;
 
@@ -78,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName("Cart").withIcon(FontAwesome.Icon.faw_shopping_cart).withIdentifier(Constants.CART),
                         new PrimaryDrawerItem().withName("Report").withIcon(FontAwesome.Icon.faw_bar_chart).withIdentifier(Constants.REPORT),
                         new PrimaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cog).withIdentifier(Constants.SETTINGS),
-                        new PrimaryDrawerItem().withName("Transactions").withIcon(FontAwesome.Icon.faw_credit_card).withIdentifier(Constants.TRANSACTIONS),
-                        new PrimaryDrawerItem().withName("Purchase Course").withIcon(FontAwesome.Icon.faw_book).withIdentifier(Constants.PURCHASE)
+                        new PrimaryDrawerItem().withName("Transactions").withIcon(FontAwesome.Icon.faw_credit_card).withIdentifier(Constants.TRANSACTIONS)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override

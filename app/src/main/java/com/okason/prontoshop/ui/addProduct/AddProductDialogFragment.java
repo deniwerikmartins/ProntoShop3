@@ -22,7 +22,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -31,13 +31,13 @@ public class AddProductDialogFragment extends DialogFragment implements AddProdu
     private AddProductContract.Action mPresenter;
     private boolean mInEditMode = false;
 
-    @Bind(R.id.edit_text_product_name) EditText mNameEditText;
-    @Bind(R.id.edit_text_product_description) EditText mDescriptionEditText;
-    @Bind(R.id.edit_text_product_promo_message) EditText mPromoMessageEditText;
-    @Bind(R.id.edit_text_product_sale_price) EditText mSalePriceEditText;
-    @Bind(R.id.edit_text_product_purchase_price) EditText mPurchasePriceEditText;
-    @Bind(R.id.auto_complete_category) AutoCompleteTextView mCategoryAutoComplete;
-    @Bind(R.id.edit_text_product_image_path) EditText mImagePathEditText;
+    @BindView(R.id.edit_text_product_name) EditText mNameEditText;
+    @BindView(R.id.edit_text_product_description) EditText mDescriptionEditText;
+    @BindView(R.id.edit_text_product_promo_message) EditText mPromoMessageEditText;
+    @BindView(R.id.edit_text_product_sale_price) EditText mSalePriceEditText;
+    @BindView(R.id.edit_text_product_purchase_price) EditText mPurchasePriceEditText;
+    @BindView(R.id.auto_complete_category) AutoCompleteTextView mCategoryAutoComplete;
+    @BindView(R.id.edit_text_product_image_path) EditText mImagePathEditText;
 
 
 

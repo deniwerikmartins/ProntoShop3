@@ -33,6 +33,7 @@ public class ShoppingCart {
         initShoppingCart();
     }
 
+
     private void initShoppingCart() {
         shoppingCart = new ArrayList<>();
         selectedCustomer = new Customer();

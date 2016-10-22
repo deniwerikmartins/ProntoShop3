@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -83,12 +83,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener
     {
-        @Bind(R.id.product_image) ImageView productImage;
-        @Bind(R.id.textview_product_category) TextView category;
-        @Bind(R.id.textview_product_name) TextView productName;
-        @Bind(R.id.textview_product_description)TextView description;
-        @Bind(R.id.image_view_add_to_cart_button) ImageView addToCartButton;
-        @Bind(R.id.textview_product_price) TextView productPrice;
+        @BindView(R.id.product_image) ImageView productImage;
+        @BindView(R.id.textview_product_category) TextView category;
+        @BindView(R.id.textview_product_name) TextView productName;
+        @BindView(R.id.textview_product_description)TextView description;
+        @BindView(R.id.image_view_add_to_cart_button) ImageView addToCartButton;
+        @BindView(R.id.textview_product_price) TextView productPrice;
 
 
 
