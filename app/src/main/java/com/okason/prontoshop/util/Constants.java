@@ -23,6 +23,7 @@ public class Constants {
     public final static String COLUMN_ID = "_id";
     public final static String COLUMN_NAME = "name";
     public final static String COLUMN_EMAIL = "email";
+    public final static String COLUMN_WEBSITE = "website";
     public final static String COLUMN_PHONE = "phone";
     public final static String COLUMN_STREET1 = "street1";
     public final static String COLUMN_STREET2 = "street2";
@@ -50,6 +51,7 @@ public class Constants {
 
     //Create constants for column names of RetailerService
     public final  static String COLUMN_INDUSTRY = "industry";
+    public final  static String COLUMN_MANUFACTURER = "manufacturer";
     public final  static String COLUMN_CONTACT_PERSON = "manager_name";
 
     public static final String COLUMN_PURCHASE_PRICE = "purchase_price";
@@ -63,5 +65,6 @@ public class Constants {
     public static final String SERIALIZED_CUSTOMER = "serialized_customer";
     public static final String COLUMN_PAYMENT_TYPE = "payment_type";
     public static final String COLUMN_PAYMENT_STATUS = "payment_status";
+
 
 }

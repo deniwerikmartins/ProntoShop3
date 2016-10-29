@@ -1,22 +1,31 @@
 package com.okason.prontoshop.data;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import com.okason.prontoshop.util.Constants;
+import com.okason.prontoshop.util.FileUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
- * Created by Valentine on 4/8/2016.
+ * Created by Valentine on 10/22/2016.
  */
-public class DatabaseHelper extends SQLiteOpenHelper{
 
+public class DatabaseHelper extends SQLiteOpenHelper {
     private final static String LOG_TAG = DatabaseHelper.class.getSimpleName();
     private final static int DATABASE_VERSION= 1;
     public static final String DATABASE_NAME = "pronto_shop.db";
 
     private static DatabaseHelper mDatabaseInstance = null;
+    private Context mContext;
 
 
     public static DatabaseHelper newInstance(Context context){
@@ -36,25 +45,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mContext = context;
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_CATEGORY_TABLE);
-        db.execSQL(CREATE_CUSTOMER_TABLE);
-        db.execSQL(CREATE_TRANSACTION_TABLE);
-        db.execSQL(CREATE_RETAILER_TABLE);
-        db.execSQL(CREATE_PRODUCT_TABLE);
-        Log.d(LOG_TAG, "Create Product: " + CREATE_PRODUCT_TABLE);
-        Log.d(LOG_TAG, "Create Customer: " + CREATE_CUSTOMER_TABLE);
+        try {
+            db.execSQL(CREATE_CATEGORY_TABLE);
+            db.execSQL(CREATE_CUSTOMER_TABLE);
+            db.execSQL(CREATE_TRANSACTION_TABLE);
+            db.execSQL(CREATE_PRODUCT_TABLE);
+        } catch (SQLException e) {
+            Log.d(LOG_TAG, " Error create database " + e.getMessage());
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if (oldVersion < 2){
+            db.execSQL("ALTER TABLE " + Constants.CUSTOMER_TABLE + " ADD COLUMN " + Constants.COLUMN_WEBSITE + " TEXT");
+        }
+        if (oldVersion < 3){
+            db.execSQL("ALTER TABLE " + Constants.PRODUCT_TABLE + " ADD COLUMN " + Constants.COLUMN_MANUFACTURER + " TEXT");
+        }
     }
-
-
 
     //String to create a customer table
     private static final String CREATE_CUSTOMER_TABLE =
@@ -62,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + Constants.COLUMN_NAME + " TEXT NOT NULL, "
                     + Constants.COLUMN_EMAIL + " TEXT, "
+                    + Constants.COLUMN_WEBSITE + " TEXT, "
                     + Constants.COLUMN_IMAGE_PATH + " TEXT, "
                     + Constants.COLUMN_PHONE + " TEXT, "
                     + Constants.COLUMN_STREET1 + " TEXT, "
@@ -81,6 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + Constants.COLUMN_NAME + " TEXT NOT NULL, "
                     + Constants.COLUMN_DESCRIPTION + " TEXT, "
+                    + Constants.COLUMN_MANUFACTURER + " TEXT, "
                     + Constants.COLUMN_PROMO_MESSAGE + " TEXT, "
                     + Constants.COLUMN_PRICE + " NUMERIC, "
                     + Constants.COLUMN_PURCHASE_PRICE + " NUMERIC, "
@@ -90,25 +107,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     + Constants.COLUMN_DATE_CREATED + " BIGINT, "
                     + Constants.COLUMN_LAST_UPDATED + " BIGINT, "
                     + "FOREIGN KEY(category_id) REFERENCES category(_id)" + ")";
-
-
-
-    //String to create a retailer table
-    private static final String CREATE_RETAILER_TABLE =
-            "CREATE TABLE " + Constants.RETAILER_TABLE + "("
-                    + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + Constants.COLUMN_NAME + " TEXT NOT NULL, "
-                    + Constants.COLUMN_EMAIL + " TEXT, "
-                    + Constants.COLUMN_PHONE + " TEXT, "
-                    + Constants.COLUMN_STREET1 + " TEXT, "
-                    + Constants.COLUMN_STREET2 + " TEXT, "
-                    + Constants.COLUMN_CITY + " TEXT, "
-                    + Constants.COLUMN_STATE + " TEXT, "
-                    + Constants.COLUMN_ZIP + " TEXT, "
-                    + Constants.COLUMN_INDUSTRY + " TEXT, "
-                    + Constants.COLUMN_DATE_CREATED + " BIGINT, "
-                    + Constants.COLUMN_LAST_UPDATED + " BIGINT, "
-                    + Constants.COLUMN_CONTACT_PERSON + " TEXT " + ")";
 
 
 
@@ -136,5 +134,66 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     + Constants.COLUMN_IMAGE_PATH + " TEXT, "
                     + Constants.COLUMN_DATE_CREATED + " BIGINT, "
                     + Constants.COLUMN_LAST_UPDATED + " BIGINT "  + ")";
+
+
+    public boolean backup() {
+
+        String backupFileName = "Backup_" + FileUtils.getDatetimeSuffix(System.currentTimeMillis());
+
+        File backupFolder = new File(Environment.getExternalStoragePublicDirectory("ProntoShop"), "");
+        if (!backupFolder.exists()) {
+            backupFolder.mkdirs();
+        }
+        // Get database files.
+        File backupDb = new File(backupFolder, backupFileName);
+        File localDb = new File(String.valueOf(mContext.getDatabasePath(DATABASE_NAME)));
+        // Attempt to backup the database.
+        try {
+
+            // Create the backup database file if it doesn't already exist.
+            backupDb.createNewFile();
+
+            // Ensure both files exist.
+            if (localDb.exists() && backupDb.exists()) {
+                // Copy the local database file to the backup database file.
+                FileUtils.copyFile(new FileInputStream(localDb), new FileOutputStream(backupDb));
+
+                String backupPath = backupDb.getAbsolutePath();
+                Log.d(LOG_TAG, "Backup Path is: " + backupPath);
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return false;
+    }
+
+
+
+    public boolean restoreDatabase(String backupPath) {
+
+        File backupDatabase = new File(backupPath);
+        File localDb = new File(String.valueOf(mContext.getDatabasePath(DATABASE_NAME)));
+        // Attempt to restore the database.
+        try {
+            // Ensure the database we're restoring exists.
+            if (backupDatabase.exists()) {
+                // Restore the new database.
+                FileUtils.copyFile(new FileInputStream(backupDatabase), new FileOutputStream(localDb));
+                // Access the copied database so SQLiteHelper will cache it and mark it as created.
+                if (getWritableDatabase() != null) {
+                    getWritableDatabase().close();
+                }
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return false;
+    }
 
 }

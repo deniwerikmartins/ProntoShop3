@@ -1,5 +1,7 @@
 package com.okason.prontoshop.ui.customers;
 
+import android.os.AsyncTask;
+
 import com.okason.prontoshop.common.ShoppingCart;
 import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.core.events.CustomerListChangedEvent;
@@ -97,4 +99,6 @@ public class CustomerListPresenter implements CustomerListContract.Actions, OnDa
     public void onSQLOperationSucceded(String message) {
         mView.showMessage(message);
     }
+
+
 }

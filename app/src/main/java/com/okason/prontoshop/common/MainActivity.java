@@ -1,6 +1,8 @@
 package com.okason.prontoshop.common;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -23,6 +25,7 @@ import com.okason.prontoshop.R;
 import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.core.events.CustomerSelectedEvent;
 import com.okason.prontoshop.core.events.UpdateToolbarEvent;
+import com.okason.prontoshop.data.DatabaseHelper;
 import com.okason.prontoshop.models.LineItem;
 import com.okason.prontoshop.ui.transaction.TransactionActivity;
 import com.okason.prontoshop.util.Constants;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Inject ShoppingCart mCart;
 
     private AccountHeader mHeader = null;
+    private Activity mActivity;
     private Drawer mDrawer = null;
 
     @Override
@@ -61,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        mActivity =this;
+
         mBus = ProntoShopApplication.getInstance().getBus();
       //  ProntoShopApplication.getInstance().getAppComponent().inject(this);
 
@@ -94,6 +100,11 @@ public class MainActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
         setupViewPager();
+
+        DatabaseHelper databaseHelper = DatabaseHelper.newInstance(this);
+        SQLiteDatabase database  = databaseHelper.getWritableDatabase();
+        database.close();
+
 
     }
 

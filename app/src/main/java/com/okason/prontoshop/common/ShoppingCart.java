@@ -42,11 +42,11 @@ public class ShoppingCart {
         if (sharedPreferences.getBoolean(Constants.OPEN_CART_EXITS, false)){
             String serializedCartItems = sharedPreferences.getString(Constants.SERIALIZED_CART_ITEMS,"");
             if (DEBUG){
-                Log.d(LOG_TAG, "Serialized Cart Items: " + serializedCartItems);
+
             }
             String serializedCustomer = sharedPreferences.getString(Constants.SERIALIZED_CUSTOMER,"");
             if (DEBUG){
-                Log.d(LOG_TAG, "Serialized Customer: " + serializedCustomer);
+
             }
             if (!serializedCartItems.equals("")){
                 shoppingCart = gson.<ArrayList<LineItem>>fromJson(serializedCartItems,
