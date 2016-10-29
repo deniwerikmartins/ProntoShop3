@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.okason.prontoshop.ui.transaction.TransactionActivity">
+    tools:context="com.okason.prontoshop.ui.transactions.TransactionActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

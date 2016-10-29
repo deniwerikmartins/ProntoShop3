@@ -1,4 +1,4 @@
-package com.okason.prontoshop.data.sqlite;
+package com.okason.prontoshop.data.contentprovider;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,16 +21,16 @@ import java.util.List;
  * Created by Valentine on 10/24/2016.
  */
 
-public class ProductSQLiteRepository implements ProductListContract.Repository{
+public class ProductContentProviderRepository implements ProductListContract.Repository{
     private final Context mContext;
     private DatabaseHelper DbHelper;
     private boolean DEBUG = false;
-    private final static String LOG_TAG = ProductSQLiteRepository.class.getSimpleName();
+    private final static String LOG_TAG = ProductContentProviderRepository.class.getSimpleName();
     private SQLiteDatabase database;
 
 
 
-    public ProductSQLiteRepository(Context context) {
+    public ProductContentProviderRepository(Context context) {
         mContext = context;
         DbHelper = DatabaseHelper.newInstance(mContext);
         database = DbHelper.getWritableDatabase();
@@ -57,7 +57,6 @@ public class ProductSQLiteRepository implements ProductListContract.Repository{
                     cursor.moveToNext();
                 }
             }
-            cursor.close();
         }
 
         return products;
@@ -71,12 +70,14 @@ public class ProductSQLiteRepository implements ProductListContract.Repository{
 
         //Create a variable of data type Product
         Product product;
+
+
         if (cursor.moveToFirst()){
             product = Product.getProductFromCursor(cursor);
         }else {
             product = null;
         }
-        cursor.close();
+
         //Return result: either a valid product or null
         return  product;
     }

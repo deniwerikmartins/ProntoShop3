@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.models.Customer;
 import com.okason.prontoshop.models.SalesTransaction;
-import com.okason.prontoshop.ui.transaction.TransactionContract;
+import com.okason.prontoshop.ui.transactions.TransactionContract;
 import com.okason.prontoshop.util.Constants;
 
 import java.util.ArrayList;

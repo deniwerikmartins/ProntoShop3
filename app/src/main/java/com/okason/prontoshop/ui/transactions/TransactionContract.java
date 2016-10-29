@@ -1,4 +1,4 @@
-package com.okason.prontoshop.ui.transaction;
+package com.okason.prontoshop.ui.transactions;
 
 import com.okason.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.okason.prontoshop.models.Customer;
@@ -27,11 +27,12 @@ public interface TransactionContract {
         void editTransaction(SalesTransaction transaction);
         void deleteTransaction(SalesTransaction transaction);
         Customer getCustomerById(long id);
+        List<LineItem> getLineItemsInTransactions(long transactionId);
     }
 
     public interface Repository{
         List<LineItem> getAllLineItems();
-        void saveTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener);
+        long saveTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener);
         List<SalesTransaction> getAllSalesTransactions();
         void updateTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener);
         SalesTransaction getTransactionById(long id);

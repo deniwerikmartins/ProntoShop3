@@ -1,4 +1,4 @@
-package com.okason.prontoshop.ui.transaction;
+package com.okason.prontoshop.ui.transactions;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

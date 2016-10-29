@@ -2,7 +2,6 @@ package com.okason.prontoshop.common;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -25,15 +24,13 @@ import com.okason.prontoshop.R;
 import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.core.events.CustomerSelectedEvent;
 import com.okason.prontoshop.core.events.UpdateToolbarEvent;
-import com.okason.prontoshop.data.DatabaseHelper;
-import com.okason.prontoshop.models.LineItem;
-import com.okason.prontoshop.ui.transaction.TransactionActivity;
+import com.okason.prontoshop.ui.transactions.TransactionActivity;
 import com.okason.prontoshop.util.Constants;
 import com.okason.prontoshop.util.Formatter;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import javax.inject.Inject;
 
@@ -68,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mActivity =this;
 
         mBus = ProntoShopApplication.getInstance().getBus();
-      //  ProntoShopApplication.getInstance().getAppComponent().inject(this);
+        ProntoShopApplication.getInstance().getAppComponent().inject(this);
 
         mHeader = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -101,11 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         setupViewPager();
 
-        DatabaseHelper databaseHelper = DatabaseHelper.newInstance(this);
-        SQLiteDatabase database  = databaseHelper.getWritableDatabase();
-        database.close();
-
-
     }
 
 
@@ -130,16 +122,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        ProntoShopApplication.getInstance().getAppComponent().inject(this);
-        mCart.saveCartToPreference();
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         try {
-            ProntoShopApplication.getInstance().getAppComponent().inject(this);
-            mCart.saveCartToPreference();
             mBus.unregister(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -149,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void onUpdateToolbar(UpdateToolbarEvent event){
-        populateToolbar(event.getLineItems());
+        populateToolbar(event.getTotalPrice(), event.getTotalQty());
     }
 
     @Subscribe
@@ -162,26 +151,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void populateToolbar(List<LineItem> listOfItemsInShoppingCart) {
-        double totalAmount = 0;
-        int numberOfItems = 0;
-        if (listOfItemsInShoppingCart != null && listOfItemsInShoppingCart.size() > 0) {
-            for (LineItem item: listOfItemsInShoppingCart){
-                totalAmount += item.getSumPrice();
-                numberOfItems += item.getQuantity();
-            }
-            mTotalTextView.setText(Formatter.formatCurrency(totalAmount));
-
-            if (numberOfItems > 1){
-                mQtyTextView.setText(numberOfItems + " items" );
-            }else {
-                mQtyTextView.setText(numberOfItems + " item" );
-            }
-        } else {
-            mTotalTextView.setText(Formatter.formatCurrency(0.00));
-            mQtyTextView.setText(0 + " item" );
-
-        }
+    private void populateToolbar(BigDecimal totalPrice, int totalQty) {
+        mTotalTextView.setText(Formatter.formatCurrency(Double.valueOf(totalPrice.doubleValue())));
+        mQtyTextView.setText(totalQty + " item" );
 
     }
 

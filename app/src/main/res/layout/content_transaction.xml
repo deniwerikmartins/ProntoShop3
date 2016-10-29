@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/margin_padding_tiny"
     android:paddingTop="@dimen/margin_padding_tiny"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.okason.prontoshop.ui.transaction.TransactionActivity"
+    tools:context="com.okason.prontoshop.ui.transactions.TransactionActivity"
     tools:showIn="@layout/activity_transaction">
 
 </RelativeLayout>

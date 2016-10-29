@@ -1,4 +1,4 @@
-package com.okason.prontoshop.data.sqlite;
+package com.okason.prontoshop.data.contentprovider;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,15 +21,15 @@ import java.util.concurrent.Executor;
  * Created by Valentine on 10/24/2016.
  */
 
-public class CustomerSQLiteRepository implements CustomerListContract.Repository {
+public class CustomerContentProviderRepository implements CustomerListContract.Repository {
 
     private final Context mContext;
     private SQLiteDatabase database;
     private DatabaseHelper DbHelper;
     private boolean DEBUG = false;
-    private final static String LOG_TAG = CustomerSQLiteRepository.class.getSimpleName();
+    private final static String LOG_TAG = CustomerContentProviderRepository.class.getSimpleName();
 
-    public CustomerSQLiteRepository(Context context) {
+    public CustomerContentProviderRepository(Context context) {
         mContext = context;
         DbHelper = DatabaseHelper.newInstance(mContext);
         database = DbHelper.getWritableDatabase();
@@ -55,7 +55,6 @@ public class CustomerSQLiteRepository implements CustomerListContract.Repository
                     cursor.moveToNext();
                 }
             }
-            cursor.close();
         }
 
 
@@ -75,8 +74,6 @@ public class CustomerSQLiteRepository implements CustomerListContract.Repository
         }else {
             customer = null;
         }
-
-        cursor.close();
 
         //Return result: either a valid customer or null
         return  customer;

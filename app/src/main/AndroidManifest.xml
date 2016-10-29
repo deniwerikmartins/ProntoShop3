@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.transaction.TransactionActivity"
+            android:name=".ui.transactions.TransactionActivity"
             android:label="@string/title_activity_transaction"
             android:parentActivityName=".common.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -35,6 +35,11 @@
             android:name=".core.AddInitialDataService"
             android:exported="false" />
 
+        <provider
+            android:name=".data.ProntoShopContentProvider"
+            android:authorities="com.okason.prontoshop.data.provider"
+            android:enabled="true"
+            android:exported="false"></provider>
     </application>
 
 </manifest>

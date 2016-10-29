@@ -1,5 +1,6 @@
 package com.okason.prontoshop.ui.checkout;
 
+import com.okason.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.okason.prontoshop.models.LineItem;
 
 import java.util.List;
@@ -30,6 +31,17 @@ public class CheckoutContract {
         void markAsPaid(boolean isPaid);
         void onItemQuantityChanged(LineItem item, int qty);
     }
+
+    public interface Repository{
+        List<LineItem> getAllLineItemsInATransaction(long transactionId);
+        long saveLineItem(LineItem lineItem, OnDatabaseOperationCompleteListener listener);
+        void updateLineItem(LineItem lineItem, OnDatabaseOperationCompleteListener listener);
+        LineItem getLineItemById(long id);
+        void deleteLineItem(long id, OnDatabaseOperationCompleteListener listener);
+
+
+    }
+
 
 
 

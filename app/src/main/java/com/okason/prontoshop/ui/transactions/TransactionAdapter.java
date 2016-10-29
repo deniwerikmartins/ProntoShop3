@@ -1,4 +1,4 @@
-package com.okason.prontoshop.ui.transaction;
+package com.okason.prontoshop.ui.transactions;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

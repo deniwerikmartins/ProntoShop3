@@ -1,21 +1,25 @@
 package com.okason.prontoshop.core.events;
 
-import com.okason.prontoshop.models.LineItem;
-
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * Created by Valentine on 4/13/2016.
  */
 public class UpdateToolbarEvent {
-    private final List<LineItem> mLineItems;
+    private final BigDecimal totalPrice;
+    private final int totalQty;
 
 
-    public UpdateToolbarEvent(List<LineItem> lineItems) {
-        mLineItems = lineItems;
+    public UpdateToolbarEvent(BigDecimal totalPrice, int totalQty) {
+        this.totalPrice = totalPrice;
+        this.totalQty = totalQty;
     }
 
-    public List<LineItem> getLineItems() {
-        return mLineItems;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public int getTotalQty() {
+        return totalQty;
     }
 }

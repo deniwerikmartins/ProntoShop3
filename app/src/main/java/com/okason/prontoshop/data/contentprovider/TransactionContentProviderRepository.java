@@ -1,4 +1,4 @@
-package com.okason.prontoshop.data.sqlite;
+package com.okason.prontoshop.data.contentprovider;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,17 +25,17 @@ import javax.inject.Inject;
  * Created by Valentine on 10/24/2016.
  */
 
-public class TransactionSQLiteRepository implements TransactionContract.Repository {
+public class TransactionContentProviderRepository implements TransactionContract.Repository {
 
     private final Context mContext;
     private DatabaseHelper DbHelper;
     private SQLiteDatabase database;
     private boolean DEBUG = false;
-    private final static String LOG_TAG = TransactionSQLiteRepository.class.getSimpleName();
+    private final static String LOG_TAG = TransactionContentProviderRepository.class.getSimpleName();
     @Inject
     ShoppingCart mCart;
 
-    public TransactionSQLiteRepository(Context context) {
+    public TransactionContentProviderRepository(Context context) {
         mContext = context;
         DbHelper = DatabaseHelper.newInstance(mContext);
         database =  DbHelper.getWritableDatabase();
@@ -51,7 +51,6 @@ public class TransactionSQLiteRepository implements TransactionContract.Reposito
     @Override
     public long saveTransaction(SalesTransaction transaction, OnDatabaseOperationCompleteListener listener) {
         //ensure that the database exists
-        long result = -1;
         if (database != null) {
             //prepare the transaction information that will be saved to the database
             ContentValues values = new ContentValues();
@@ -64,7 +63,7 @@ public class TransactionSQLiteRepository implements TransactionContract.Reposito
             values.put(Constants.COLUMN_DATE_CREATED, System.currentTimeMillis());
             values.put(Constants.COLUMN_LAST_UPDATED, System.currentTimeMillis());
             try {
-                result = database.insertOrThrow(Constants.TRANSACTION_TABLE, null, values);
+                database.insertOrThrow(Constants.TRANSACTION_TABLE, null, values);
                 listener.onSQLOperationSucceded("Transaction saved");
                 if (DEBUG){
                     Log.d(LOG_TAG, "Transaction saved");
@@ -73,7 +72,8 @@ public class TransactionSQLiteRepository implements TransactionContract.Reposito
                 listener.onSQLOperationFailed(e.getCause() + " " + e.getMessage());
             }
         }
-        return result;
+
+        return 0;
 
     }
 
@@ -97,7 +97,6 @@ public class TransactionSQLiteRepository implements TransactionContract.Reposito
                     cursor.moveToNext();
                 }
             }
-            cursor.close();
         }
 
         return transactions;
@@ -146,7 +145,7 @@ public class TransactionSQLiteRepository implements TransactionContract.Reposito
         } else {
             transaction = null;
         }
-        cursor.close();
+
         //Return result: either a valid transaction or null
         return transaction;
     }

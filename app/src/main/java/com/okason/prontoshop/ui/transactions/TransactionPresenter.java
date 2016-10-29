@@ -1,9 +1,11 @@
-package com.okason.prontoshop.ui.transaction;
+package com.okason.prontoshop.ui.transactions;
 
 import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.okason.prontoshop.models.Customer;
+import com.okason.prontoshop.models.LineItem;
 import com.okason.prontoshop.models.SalesTransaction;
+import com.okason.prontoshop.ui.checkout.CheckoutContract;
 import com.okason.prontoshop.ui.customers.CustomerListContract;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class TransactionPresenter implements TransactionContract.Actions, OnData
     private final TransactionContract.View mView;
     @Inject TransactionContract.Repository mRepository;
     @Inject CustomerListContract.Repository mCustomerRepository;
+    @Inject CheckoutContract.Repository mLineItemRepository;
 
     public TransactionPresenter(TransactionContract.View view) {
         mView = view;
@@ -54,6 +57,11 @@ public class TransactionPresenter implements TransactionContract.Actions, OnData
     @Override
     public Customer getCustomerById(long id) {
         return mCustomerRepository.getCustomerById(id);
+    }
+
+    @Override
+    public List<LineItem> getLineItemsInTransactions(long transactionId) {
+        return mLineItemRepository.getAllLineItemsInATransaction(transactionId);
     }
 
     @Override

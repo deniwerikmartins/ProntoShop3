@@ -2,8 +2,6 @@ package com.okason.prontoshop.models;
 
 import android.database.Cursor;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.okason.prontoshop.util.Constants;
 
 import java.util.ArrayList;
@@ -31,7 +29,6 @@ public class SalesTransaction {
         paid = false;
         transactionDate = System.currentTimeMillis();
         modifiedDate = System.currentTimeMillis();
-        jsonLineItems = "";
         lineItems = new ArrayList<>();
     }
 
@@ -40,10 +37,9 @@ public class SalesTransaction {
 
     //the list of line items will be collapsed into this json
     //string before it can be saved to the database
-    private String jsonLineItems;
+   // private String jsonLineItems;
 
-    public SalesTransaction (long _id, long custId, String lineItems,
-                             double subTotal, double tax, double total,
+    public SalesTransaction (long _id, long custId, double subTotal, double tax, double total,
                              boolean completed, String payment, long dateOfTransaction, long dateModified){
         id = _id;
         customerId = custId;
@@ -54,7 +50,6 @@ public class SalesTransaction {
         paymentType = payment;
         transactionDate = dateOfTransaction;
         modifiedDate = dateModified;
-        jsonLineItems = lineItems;
     };
 
 
@@ -63,7 +58,6 @@ public class SalesTransaction {
     public static SalesTransaction getSalesTransactionFromCursor(Cursor cursor){
         long id = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID));
         long customerId = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_CUSTOMER_ID));
-        String lineItems = cursor.getString(cursor.getColumnIndex(Constants.COLUMN_LINE_ITEMS));
         double subTotal = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_SUB_TOTAL_AMOUNT));
         double tax = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_TOTAL_AMOUNT));
         double total = cursor.getDouble(cursor.getColumnIndex(Constants.COLUMN_TOTAL_AMOUNT));
@@ -72,7 +66,7 @@ public class SalesTransaction {
         long dateOfTransaction = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_DATE_CREATED));
         long dateModified = cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_LAST_UPDATED));
 
-         SalesTransaction transaction = new SalesTransaction(id, customerId,lineItems,
+         SalesTransaction transaction = new SalesTransaction(id, customerId,
                  subTotal, tax, total, completed, payment, dateOfTransaction,dateModified){
 
          };
@@ -138,31 +132,13 @@ public class SalesTransaction {
         this.modifiedDate = modifiedDate;
     }
 
-    //this method retrieves the JSON String and inflates it back into a List
-    //using GSON and returns the ArrayList to the app to use
     public List<LineItem> getLineItems() {
-        Gson gson = new Gson();
-        String serializedLineItems = getJsonLineItems();
-        List<LineItem> result = gson.<ArrayList<LineItem>>fromJson(serializedLineItems, new TypeToken<ArrayList<LineItem>>(){}.getType());
-        return result;
+        return lineItems;
     }
 
-    //this methods takes a list of line items and collapse it into a
-    //String since we cannot save a List directly in a database
+
     public void setLineItems(List<LineItem> lineItems) {
-        Gson gson = new Gson();
-        String lineItemJson = gson.toJson(lineItems);
-        this.setJsonLineItems(lineItemJson);
-    }
-
-    //the app does not interact directly with this property
-    //it is used to save a list of Lineitems to the database
-    public String getJsonLineItems() {
-        return jsonLineItems;
-    }
-
-    public void setJsonLineItems(String jsonLineItems) {
-        this.jsonLineItems = jsonLineItems;
+        this.lineItems = lineItems;
     }
 
     public boolean isPaid() {

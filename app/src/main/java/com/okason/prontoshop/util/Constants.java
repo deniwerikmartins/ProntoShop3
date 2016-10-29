@@ -67,4 +67,68 @@ public class Constants {
     public static final String COLUMN_PAYMENT_STATUS = "payment_status";
 
 
+    public static final String[] COLUMNS_CATEGORY = {
+
+            Constants.COLUMN_ID,
+            Constants.COLUMN_NAME,
+            Constants.COLUMN_DATE_CREATED,
+            Constants.COLUMN_LAST_UPDATED
+
+    };
+
+    public static final String[] COLUMNS_CUSTOMER = {
+
+            Constants.COLUMN_ID,
+            Constants.COLUMN_NAME,
+            Constants.COLUMN_EMAIL,
+            Constants.COLUMN_IMAGE_PATH,
+            Constants.COLUMN_PHONE,
+            Constants.COLUMN_STREET1,
+            Constants.COLUMN_STREET2,
+            Constants.COLUMN_CITY,
+            Constants.COLUMN_STATE,
+            Constants.COLUMN_ZIP,
+            Constants.COLUMN_NOTE,
+            Constants.COLUMN_DATE_CREATED,
+            Constants.COLUMN_LAST_UPDATED
+
+    };
+
+    public static final String[] COLUMNS_TRANSACTION = {
+
+            Constants.COLUMN_ID,
+            Constants.COLUMN_CUSTOMER_ID,
+            Constants.COLUMN_SUB_TOTAL_AMOUNT,
+            Constants.COLUMN_TAX_AMOUNT,
+            Constants.COLUMN_TOTAL_AMOUNT,
+            Constants.COLUMN_PAYMENT_STATUS,
+            Constants.COLUMN_PAYMENT_STATUS,
+            Constants.COLUMN_PAYMENT_TYPE,
+            Constants.COLUMN_DATE_CREATED,
+            Constants.COLUMN_LAST_UPDATED,
+            Constants.COLUMN_LINE_ITEMS
+
+    };
+
+
+    public static final String[] COLUMNS_PRODUCT = {
+
+            Constants.COLUMN_ID,
+            Constants.COLUMN_NAME,
+            Constants.COLUMN_DESCRIPTION,
+            Constants.COLUMN_PROMO_MESSAGE,
+            Constants.COLUMN_PRICE,
+            Constants.COLUMN_PURCHASE_PRICE,
+            Constants.COLUMN_IMAGE_PATH,
+            Constants.COLUMN_CATEGORY_ID,
+            Constants.COLUMN_CATEGORY_NAME,
+            Constants.COLUMN_DATE_CREATED,
+            Constants.COLUMN_LAST_UPDATED
+
+    };
+
+
+
+
+
 }
