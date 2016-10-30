@@ -14,7 +14,7 @@ public class Constants {
 
     public static final String PRODUCT_TABLE = "product";
     public static final String CUSTOMER_TABLE = "customer";
-    public static final String RETAILER_TABLE = "retailer";
+    public static final String LINEITEM_TABLE = "lineitem";
     public static final String CATEGORY_TABLE = "category";
     public static final String TRANSACTION_TABLE = "transactions";
 
@@ -128,7 +128,7 @@ public class Constants {
     };
 
 
-
-
-
+    public static final String COLUMN_QUANTITY = "quantity";
+    public static final String COLUMN_PRODUCT_ID = "product_id";
+    public static final String COLUMN_TRANSACTION_ID = "transaction_id";
 }

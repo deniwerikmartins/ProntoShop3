@@ -35,11 +35,6 @@
             android:name=".core.AddInitialDataService"
             android:exported="false" />
 
-        <provider
-            android:name=".data.ProntoShopContentProvider"
-            android:authorities="com.okason.prontoshop.data.provider"
-            android:enabled="true"
-            android:exported="false"></provider>
     </application>
 
 </manifest>

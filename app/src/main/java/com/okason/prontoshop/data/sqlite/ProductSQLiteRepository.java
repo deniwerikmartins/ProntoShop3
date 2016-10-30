@@ -211,7 +211,7 @@ public class ProductSQLiteRepository implements ProductListContract.Repository{
         if (cursor.moveToFirst()){
             category = Category.fromCursor(cursor);
         }
-
+        cursor.close();
         return category;
     }
 

@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         setupViewPager();
 
+
+
     }
 
 

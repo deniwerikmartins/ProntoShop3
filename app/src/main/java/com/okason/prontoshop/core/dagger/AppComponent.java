@@ -1,7 +1,6 @@
 package com.okason.prontoshop.core.dagger;
 
 import com.okason.prontoshop.common.MainActivity;
-import com.okason.prontoshop.data.contentprovider.TransactionContentProviderRepository;
 import com.okason.prontoshop.data.sqlite.SQLiteReport;
 import com.okason.prontoshop.data.sqlite.TransactionSQLiteRepository;
 import com.okason.prontoshop.ui.addCustomer.AddCustomerPresenter;
@@ -39,7 +38,6 @@ public interface AppComponent {
         void inject(TransactionListFragment fragment);
         void inject(MainActivity activity);
         void inject(TransactionSQLiteRepository repository);
-        void inject(TransactionContentProviderRepository repository);
         void inject(SQLiteReport report);
 
 
