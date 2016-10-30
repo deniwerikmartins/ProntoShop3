@@ -56,6 +56,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(CREATE_CUSTOMER_TABLE);
             db.execSQL(CREATE_TRANSACTION_TABLE);
             db.execSQL(CREATE_PRODUCT_TABLE);
+            db.execSQL(CREATE_LINEITEM_TABLE);
+            Log.d(LOG_TAG, "Product Table: " + CREATE_PRODUCT_TABLE);
         } catch (SQLException e) {
             Log.d(LOG_TAG, " Error create database " + e.getMessage());
         }
@@ -69,6 +71,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 3){
             db.execSQL("ALTER TABLE " + Constants.PRODUCT_TABLE + " ADD COLUMN " + Constants.COLUMN_MANUFACTURER + " TEXT");
         }
+    }
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        db.setForeignKeyConstraintsEnabled(true);
     }
 
     //String to create a customer table
@@ -134,6 +141,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + Constants.COLUMN_IMAGE_PATH + " TEXT, "
                     + Constants.COLUMN_DATE_CREATED + " BIGINT, "
                     + Constants.COLUMN_LAST_UPDATED + " BIGINT "  + ")";
+
+
+    //String to create a category table
+    private static final String CREATE_LINEITEM_TABLE =
+            "CREATE TABLE " + Constants.LINEITEM_TABLE + "("
+                    + Constants.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + Constants.COLUMN_QUANTITY + " INT NOT NULL, "
+                    + Constants.COLUMN_PRODUCT_ID + " INTEGER, "
+                    + Constants.COLUMN_TRANSACTION_ID + " INTEGER, "
+                    + Constants.COLUMN_DATE_CREATED + " BIGINT, "
+                    + Constants.COLUMN_LAST_UPDATED + " BIGINT, "
+                    + "FOREIGN KEY(product_id) REFERENCES product(_id),"
+                    + "FOREIGN KEY(transaction_id) REFERENCES transactions(_id) ON DELETE CASCADE" + ")";
+
+
 
 
     public boolean backup() {
