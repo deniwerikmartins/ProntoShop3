@@ -1,6 +1,5 @@
 package com.okason.prontoshop.ui.checkout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -10,7 +9,6 @@ import com.okason.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.okason.prontoshop.models.LineItem;
 import com.okason.prontoshop.models.SalesTransaction;
 import com.okason.prontoshop.ui.transactions.TransactionContract;
-import com.okason.prontoshop.util.ThreadPerTaskExecutor;
 
 import java.util.List;
 
@@ -96,47 +94,18 @@ public class CheckoutPresenter implements CheckoutContract.Actions, OnDatabaseOp
         transaction.setLineItems(mCart.getShoppingCart());
         transaction.setPaid(paid);
 
-
-
-
-        ThreadPerTaskExecutor thread = new ThreadPerTaskExecutor();
-        thread.execute(new Runnable() {
-            @Override
-            public void run() {
-                transactionId =  mTransactionRepository.saveTransaction(transaction, new OnDatabaseOperationCompleteListener() {
-                   @Override
-                   public void onSQLOperationFailed(final String error) {
-                       ((Activity) mContext).runOnUiThread(new Runnable() {
-                           @Override
-                           public void run() {
-                               mView.showMessage(error);
-                           }
-                       });
-                   }
-
-                   @Override
-                   public void onSQLOperationSucceded(final String message) {
-                       if (transactionId != -1) {
-                           for (LineItem lineItem: transaction.getLineItems()){
-                               lineItem.setTransactionId(transactionId);
-                               mLineItemRepository.saveLineItem(lineItem, CheckoutPresenter.this);
-                           }
-                           ((Activity) mContext).runOnUiThread(new Runnable() {
-                               @Override
-                               public void run() {
-                                   mView.showMessage(message);
-                               }
-                           });
-                       }
-
-                   }
-               });
-
+        transactionId =  mTransactionRepository.saveTransaction(transaction, this);
+        if (transactionId != -1) {
+            for (LineItem lineItem: transaction.getLineItems()){
+                lineItem.setTransactionId(transactionId);
+                mLineItemRepository.saveLineItem(lineItem, CheckoutPresenter.this);
             }
-        });
+        }
 
         mCart.clearShoppingCart();
         loadLineItems();
+
+
     }
 
     @Override
