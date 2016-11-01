@@ -1,6 +1,7 @@
 package com.okason.prontoshop.ui.checkout;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.okason.prontoshop.common.ShoppingCart;
@@ -93,19 +94,10 @@ public class CheckoutPresenter implements CheckoutContract.Actions, OnDatabaseOp
         transaction.setPaymentType(selectedPaymentType);
         transaction.setLineItems(mCart.getShoppingCart());
         transaction.setPaid(paid);
-
+        new SaveTransactionAsync().execute(transaction);
         transactionId =  mTransactionRepository.saveTransaction(transaction, this);
-        if (transactionId != -1) {
-            for (LineItem lineItem: transaction.getLineItems()){
-                lineItem.setTransactionId(transactionId);
-                mLineItemRepository.saveLineItem(lineItem, CheckoutPresenter.this);
-            }
-        }
-
         mCart.clearShoppingCart();
         loadLineItems();
-
-
     }
 
     @Override
@@ -153,5 +145,38 @@ public class CheckoutPresenter implements CheckoutContract.Actions, OnDatabaseOp
     @Override
     public void onSQLOperationSucceded(String message) {
         mView.showMessage(message);
+    }
+
+    public class SaveTransactionAsync extends AsyncTask<SalesTransaction, Void, String>{
+
+        @Override
+        protected String doInBackground(SalesTransaction... params) {
+            SalesTransaction transaction = params[0];
+            final String[] result = {""};
+            long id = mTransactionRepository.saveTransaction(transaction, new OnDatabaseOperationCompleteListener() {
+                @Override
+                public void onSQLOperationFailed(String error) {
+                    result[0] = error;
+                }
+
+                @Override
+                public void onSQLOperationSucceded(String message) {
+                    result[0] = message;
+                }
+            });
+            if (id > -1){
+                for (LineItem lineItem: transaction.getLineItems()){
+                    lineItem.setTransactionId(transactionId);
+                    mLineItemRepository.saveLineItem(lineItem, CheckoutPresenter.this);
+                }
+            }
+            return result[0];
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            mView.showMessage(result);
+        }
     }
 }
