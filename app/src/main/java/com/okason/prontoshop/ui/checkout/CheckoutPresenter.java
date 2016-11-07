@@ -95,9 +95,8 @@ public class CheckoutPresenter implements CheckoutContract.Actions, OnDatabaseOp
         transaction.setLineItems(mCart.getShoppingCart());
         transaction.setPaid(paid);
         new SaveTransactionAsync().execute(transaction);
-        transactionId =  mTransactionRepository.saveTransaction(transaction, this);
-        mCart.clearShoppingCart();
-        loadLineItems();
+      //  transactionId =  mTransactionRepository.saveTransaction(transaction, this);
+
     }
 
     @Override
@@ -177,6 +176,8 @@ public class CheckoutPresenter implements CheckoutContract.Actions, OnDatabaseOp
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             mView.showMessage(result);
+            mCart.clearShoppingCart();
+            loadLineItems();
         }
     }
 }
