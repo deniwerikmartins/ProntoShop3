@@ -1,6 +1,6 @@
 package com.okason.prontoshop.core.dagger;
 
-import com.squareup.otto.Bus;
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Singleton;
 
@@ -12,7 +12,7 @@ public class BusModule {
 
     @Provides
     @Singleton
-    public Bus provideBus() {
-        return new Bus();
+    public EventBus provideBus() {
+        return new EventBus();
     }
 }

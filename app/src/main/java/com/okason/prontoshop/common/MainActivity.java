@@ -27,8 +27,9 @@ import com.okason.prontoshop.core.events.UpdateToolbarEvent;
 import com.okason.prontoshop.ui.transactions.TransactionActivity;
 import com.okason.prontoshop.util.Constants;
 import com.okason.prontoshop.util.Formatter;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.math.BigDecimal;
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)Toolbar mToolbar;
     @BindView(R.id.tabs) TabLayout tabLayout;
     @BindView(R.id.viewpager) ViewPager viewPager;
-    private Bus mBus;
+    private EventBus mBus;
     @Inject ShoppingCart mCart;
 
     private AccountHeader mHeader = null;

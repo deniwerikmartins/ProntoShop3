@@ -16,7 +16,8 @@ import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.core.listeners.OnTransactionSelectedListener;
 import com.okason.prontoshop.models.Customer;
 import com.okason.prontoshop.models.SalesTransaction;
-import com.squareup.otto.Bus;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,8 @@ public class TransactionListFragment extends Fragment
     @BindView(R.id.transaction_recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.empty_text) TextView mEmptyTextView;
 
-    @Inject Bus mBus;
+    @Inject
+    EventBus mBus;
 
     public TransactionListFragment() {
         // Required empty public constructor

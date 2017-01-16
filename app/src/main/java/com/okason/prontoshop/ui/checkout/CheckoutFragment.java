@@ -20,7 +20,8 @@ import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.core.listeners.CartActionsListener;
 import com.okason.prontoshop.models.LineItem;
 import com.okason.prontoshop.util.Formatter;
-import com.squareup.otto.Bus;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class CheckoutFragment extends Fragment implements
     @BindView(R.id.text_view_tax_value) TextView mTotalTaxValue;
     @BindView(R.id.radio_group_payment_type)     RadioGroup mRadioGroup;
 
-    private Bus mBus;
+    private EventBus mBus;
 
 
 
@@ -239,7 +240,13 @@ public class CheckoutFragment extends Fragment implements
         mCartPresenter.onItemQuantityChanged(item, qty);
     }
 
-    private void showToastMessage(String message){
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    private void showToastMessage(final String message){
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

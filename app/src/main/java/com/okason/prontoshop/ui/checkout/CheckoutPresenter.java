@@ -15,6 +15,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static android.R.attr.id;
+
 /**
  * Created by Valentine on 4/7/2016.
  */
@@ -152,7 +154,7 @@ public class CheckoutPresenter implements CheckoutContract.Actions, OnDatabaseOp
         protected String doInBackground(SalesTransaction... params) {
             SalesTransaction transaction = params[0];
             final String[] result = {""};
-            long id = mTransactionRepository.saveTransaction(transaction, new OnDatabaseOperationCompleteListener() {
+            transactionId = mTransactionRepository.saveTransaction(transaction, new OnDatabaseOperationCompleteListener() {
                 @Override
                 public void onSQLOperationFailed(String error) {
                     result[0] = error;

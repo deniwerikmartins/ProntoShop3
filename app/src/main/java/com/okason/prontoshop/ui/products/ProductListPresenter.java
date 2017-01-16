@@ -6,8 +6,9 @@ import com.okason.prontoshop.core.events.ProductListChangedEvent;
 import com.okason.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.okason.prontoshop.models.LineItem;
 import com.okason.prontoshop.models.Product;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class ProductListPresenter implements ProductListContract.Actions, OnData
     private final ProductListContract.View mView;
     @Inject ProductListContract.Repository mRepository;
     @Inject ShoppingCart mCart;
-    @Inject Bus mBus;
+    @Inject
+    EventBus mBus;
 
 
     public ProductListPresenter(ProductListContract.View mView) {

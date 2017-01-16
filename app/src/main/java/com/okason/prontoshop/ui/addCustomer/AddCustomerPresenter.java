@@ -5,7 +5,8 @@ import com.okason.prontoshop.core.events.CustomerListChangedEvent;
 import com.okason.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.okason.prontoshop.models.Customer;
 import com.okason.prontoshop.ui.customers.CustomerListContract;
-import com.squareup.otto.Bus;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,7 @@ import javax.inject.Inject;
 public class AddCustomerPresenter implements AddCustomerContract.Action, OnDatabaseOperationCompleteListener{
     private final AddCustomerContract.View mView;
     @Inject CustomerListContract.Repository mRepository;
-    @Inject Bus mBus;
+    @Inject EventBus mBus;
     private long customerId = 0;
 
     public AddCustomerPresenter(AddCustomerContract.View view) {

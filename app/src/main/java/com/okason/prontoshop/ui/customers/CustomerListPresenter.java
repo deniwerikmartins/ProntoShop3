@@ -1,14 +1,13 @@
 package com.okason.prontoshop.ui.customers;
 
-import android.os.AsyncTask;
-
 import com.okason.prontoshop.common.ShoppingCart;
 import com.okason.prontoshop.core.ProntoShopApplication;
 import com.okason.prontoshop.core.events.CustomerListChangedEvent;
 import com.okason.prontoshop.core.listeners.OnDatabaseOperationCompleteListener;
 import com.okason.prontoshop.models.Customer;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -21,7 +20,8 @@ public class CustomerListPresenter implements CustomerListContract.Actions, OnDa
     private final CustomerListContract.View mView;
     @Inject CustomerListContract.Repository mRepository;
     @Inject ShoppingCart mCart;
-    @Inject Bus mBus;
+    @Inject
+    EventBus mBus;
 
 
     public CustomerListPresenter(CustomerListContract.View customerListView) {

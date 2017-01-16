@@ -9,14 +9,16 @@ import com.okason.prontoshop.core.dagger.AppComponent;
 import com.okason.prontoshop.core.dagger.AppModule;
 import com.okason.prontoshop.core.dagger.DaggerAppComponent;
 import com.okason.prontoshop.util.Constants;
-import com.squareup.otto.Bus;
+
+import org.greenrobot.eventbus.EventBus;
+
 
 /**
  * Created by Valentine on 4/9/2016.
  */
 public class ProntoShopApplication extends Application {
-    private Bus bus;
-    public Bus getBus()
+    private EventBus bus;
+    public org.greenrobot.eventbus.EventBus getBus()
     {
         return bus;
     }
@@ -34,7 +36,7 @@ public class ProntoShopApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        instance.bus = new Bus();
+        instance.bus = new EventBus();
         getAppComponent();
         initDefaultProducts();
     }
