@@ -2,14 +2,19 @@ package com.okason.prontoshop.models;
 
 import java.math.BigDecimal;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Valentine on 4/6/2016.
  */
-public class LineItem extends Product {
+public class LineItem extends RealmObject {
+    @PrimaryKey
     private long id;
     private int quantity;
     private long transactionId;
     private long productId;
+    private Product product;
 
 
 
@@ -17,9 +22,9 @@ public class LineItem extends Product {
     }
 
     public LineItem(Product product, int quantity) {
-        super(product);
         this.quantity = quantity;
         this.productId = product.getId();
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -30,12 +35,12 @@ public class LineItem extends Product {
         this.quantity = quantity;
     }
 
-    @Override
+
     public long getId() {
         return id;
     }
 
-    @Override
+
     public void setId(long id) {
         this.id = id;
     }
@@ -57,6 +62,14 @@ public class LineItem extends Product {
     }
 
     public BigDecimal getSumPrice() {
-        return BigDecimal.valueOf(getSalePrice() * quantity);
+        return BigDecimal.valueOf(product.getSalePrice() * quantity);
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

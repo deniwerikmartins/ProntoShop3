@@ -55,12 +55,12 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
             try {
                 final LineItem lineitem = mLineItems.get(position);
                 Picasso.with(mActivity)
-                        .load(lineitem.getImagePath())
+                        .load(lineitem.getProduct().getImagePath())
                         .fit()
                         .placeholder(R.drawable.default_image)
                         .into(holder.lineitemImage);
-                holder.lineitemName.setText(lineitem.getProductName());
-                holder.lineitemPrice.setText(Formatter.formatCurrency(lineitem.getSalePrice()));
+                holder.lineitemName.setText(lineitem.getProduct().getProductName());
+                holder.lineitemPrice.setText(Formatter.formatCurrency(lineitem.getProduct().getSalePrice()));
                 holder.qtyEditText.setText(String.valueOf(lineitem.getQuantity()));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -134,7 +134,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
         View titleView = inflater.inflate(R.layout.dialog_title, null);
         TextView titleText = (TextView)titleView.findViewById(R.id.text_view_dialog_title);
-        titleText.setText(item.getProductName());
+        titleText.setText(item.getProduct().getProductName());
         dialog.setCustomTitle(titleView);
 
         final EditText qtyEditText = (EditText)rootView.findViewById(R.id.edit_text_item_qty);

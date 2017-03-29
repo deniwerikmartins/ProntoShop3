@@ -21,7 +21,7 @@ import java.io.IOException;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private final static String LOG_TAG = DatabaseHelper.class.getSimpleName();
-    private final static int DATABASE_VERSION= 1;
+    private final static int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "pronto_shop.db";
 
     private static DatabaseHelper mDatabaseInstance = null;

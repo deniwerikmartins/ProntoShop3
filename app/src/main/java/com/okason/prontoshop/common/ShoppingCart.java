@@ -66,7 +66,7 @@ public class ShoppingCart {
     public void removeItemFromCart(LineItem item){
         int quantity = shoppingCartMap.get(item);
         shoppingCartMap.remove(item);
-        totalPrice = totalPrice.subtract(BigDecimal.valueOf(item.getSalePrice()).multiply(BigDecimal.valueOf(quantity)));
+        totalPrice = totalPrice.subtract(BigDecimal.valueOf(item.getProduct().getSalePrice()).multiply(BigDecimal.valueOf(quantity)));
         totalCartQuantity -= quantity;
 
         if (shoppingCartMap.size() == 0){
@@ -116,11 +116,11 @@ public class ShoppingCart {
 
     public void updateItemQty(LineItem item, int newQty) {
         int currentQuantity = shoppingCartMap.get(item);
-        BigDecimal sumPrice = BigDecimal.valueOf(item.getSalePrice()).multiply(BigDecimal.valueOf(currentQuantity));
+        BigDecimal sumPrice = BigDecimal.valueOf(item.getProduct().getSalePrice()).multiply(BigDecimal.valueOf(currentQuantity));
 
         shoppingCartMap.put(item, currentQuantity);
         totalCartQuantity = totalCartQuantity - currentQuantity + newQty;
-        totalPrice = totalPrice.subtract(sumPrice).add(BigDecimal.valueOf(item.getSalePrice()).multiply(BigDecimal.valueOf(currentQuantity)));
+        totalPrice = totalPrice.subtract(sumPrice).add(BigDecimal.valueOf(item.getProduct().getSalePrice()).multiply(BigDecimal.valueOf(currentQuantity)));
         populateToolbar();
     }
 

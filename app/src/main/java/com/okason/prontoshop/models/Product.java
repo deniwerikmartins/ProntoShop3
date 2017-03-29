@@ -4,10 +4,14 @@ import android.database.Cursor;
 
 import com.okason.prontoshop.util.Constants;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Valentine on 4/5/2016.
  */
-public class Product {
+public class Product extends RealmObject {
+    @PrimaryKey
     private long id;
     private String productName;
     private String description;

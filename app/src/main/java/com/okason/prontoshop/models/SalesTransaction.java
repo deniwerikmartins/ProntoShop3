@@ -7,10 +7,15 @@ import com.okason.prontoshop.util.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Valentine on 4/6/2016.
  */
-public class SalesTransaction {
+public class SalesTransaction extends RealmObject {
+    @PrimaryKey
     private long id;
     private long customerId;
     private double subTotalAmount;
@@ -33,6 +38,7 @@ public class SalesTransaction {
     }
 
     //this property cannot be persisted
+    @Ignore
     private List<LineItem> lineItems;
 
     //the list of line items will be collapsed into this json
